@@ -1,0 +1,29 @@
+
+1. Add ability to create new Character with unique name, sex and optional description/bio.
+   Character must have unique name.
+2. Implement Character sorting according to name / date created.
+3. Permanently store list of Characters.
+   List of Characters should be loaded on startup(login).
+4. Add ability to create Room (name, max capacity, description)
+   Room must have unique name.
+   All Rooms must be shared between all users.
+5. List of all Rooms should be stored permanently and displayed on startup(login).
+6. Add ability to delete Room.
+   Room can be deleted only by User who created it.
+7. Add possibility for Character to enter the Room.
+   Room should not allow more Characters that it's capacity allows.
+8. Implement functionality to send the Message while in the Room.
+   Message should be visible to all Characters currently in that Room.
+9. Add ability to view all other Characters currently present in the Room.
+   List of currently present Characters should be updated as soon as new
+   Character joins/leaves the Room.
+
++. (optional) Add ability to add Room to "Favourite list".
+   (optional) If Room is deleted, it should disappear from "Favourite list" of all other Users.
++. (optional) Add ability to customise Character's appearance.
++. add Login/create User possibility.
+   Only valid users should be allowed to access application.
+   Each User has his own list of Characters.
+   Each User can enter any existing Room.
+   Each User can create a Room.
+   (optional) restrict number of Rooms User can create to 2.
