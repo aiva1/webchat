@@ -1,16 +1,19 @@
 package lv.javaguru.java2.ui;
 
 import lv.javaguru.java2.Character;
+import lv.javaguru.java2.businesslogic.CreateCharacterService;
+import lv.javaguru.java2.businesslogic.api.CreateCharacterRequest;
+import lv.javaguru.java2.businesslogic.api.CreateCharacterResponse;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CreateCharacterView implements View {
 
-    private List<Character> characters;
+    private CreateCharacterService createCharService;
 
-    public CreateCharacterView(List<Character> characters) {
-        this.characters = characters;
+    public CreateCharacterView(CreateCharacterService createCharService) {
+        this.createCharService = createCharService;
     }
 
     @Override
@@ -25,15 +28,14 @@ public class CreateCharacterView implements View {
         System.out.print("Enter bio: ");
         String bio = scanner.nextLine();
 
+
         ///business logic
-        Character character = new Character();
-        character.setName(name);
-        character.setMale(isMale);
-        character.setBio(bio);
-        characters.add(character);
+        createCharService.createCharacter(new CreateCharacterRequest(name, isMale, bio));
+        //p.s. note: no response for now
         ///end of business logic
 
-        System.out.println("New Character created!");
+
+        System.out.println("New Character create end");
         System.out.println();
     }
 }

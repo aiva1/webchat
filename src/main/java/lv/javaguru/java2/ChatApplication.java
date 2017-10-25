@@ -1,5 +1,9 @@
 package lv.javaguru.java2;
 
+import lv.javaguru.java2.businesslogic.*;
+import lv.javaguru.java2.businesslogic.impl.*;
+import lv.javaguru.java2.database.temp.InMemoryCharacterDB;
+import lv.javaguru.java2.database.temp.InMemoryRoomDB;
 import lv.javaguru.java2.ui.*;
 
 import java.util.*;
@@ -21,21 +25,34 @@ public class ChatApplication {
         //11. Delete Room
         //12. Exit
 
+        InMemoryCharacterDB characterDB = new InMemoryCharacterDB();
+        InMemoryRoomDB roomDB = new InMemoryRoomDB();
+
+        CreateCharacterService createCharacterService = new CreateCharacterServiceImpl(characterDB);
+        DisplayCharactersService displayCharactersService = new DisplayCharactersServiceImpl(characterDB);
+        DeleteCharacterService deleteCharacterService = new DeleteCharacterServiceImpl(characterDB);
+
+        CreateRoomService createRoomService = new CreateRoomServiceImpl(roomDB);
+        DisplayRoomsService displayRoomsService = new DisplayRoomServiceImpl(roomDB);
+        DeleteRoomService deleteRoomService = new DeleteRoomServiceImpl(roomDB);
+
+
+
         List<Character> characters = new ArrayList<>();
         List<Room> rooms = new ArrayList<>();
 
         Map<Integer, View> commands = new HashMap<>();
-        commands.put(1, new CreateCharacterView(characters));
-        commands.put(2, new CreateRoomView(rooms));
-        commands.put(3, new AddCharacterToRoomView(characters, rooms)); //TODO: consider using Character instead of whole list
-        commands.put(4, new SendMessageToRoomView(rooms)); //TODO: consider sending message from specific Character to specific Room
-        commands.put(5, new DisplayAllMessagesInRoomView(rooms)); //TODO: consider using Room instead of list
-        commands.put(6, new DisplayCharactersView(characters));
-        commands.put(7, new DisplayRoomsView(rooms));
-        commands.put(8, new DisplayAllCharactersInRoomView(rooms));
-        commands.put(9, new RemoveCharacterFromRoomView(characters, rooms));
-        commands.put(10, new DeleteCharacterView(characters));
-        commands.put(11, new DeleteRoomView(rooms));
+        commands.put(1, new CreateCharacterView(createCharacterService));
+        commands.put(2, new CreateRoomView(createRoomService));
+        //commands.put(3, new AddCharacterToRoomView(characters, rooms)); //TODO: consider using Character instead of whole list
+        //commands.put(4, new SendMessageToRoomView(rooms)); //TODO: consider sending message from specific Character to specific Room
+        //commands.put(5, new DisplayAllMessagesInRoomView(rooms)); //TODO: consider using Room instead of list
+        commands.put(6, new DisplayCharactersView(displayCharactersService));
+        commands.put(7, new DisplayRoomsView(displayRoomsService));
+        //commands.put(8, new DisplayAllCharactersInRoomView(rooms));
+        //commands.put(9, new RemoveCharacterFromRoomView(characters, rooms));
+        commands.put(10, new DeleteCharacterView(deleteCharacterService));
+        commands.put(11, new DeleteRoomView(deleteRoomService));
 
         while (true) {
             printMenu();

@@ -1,16 +1,17 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.businesslogic.DeleteRoomService;
+import lv.javaguru.java2.businesslogic.api.DeleteRoomRequest;
+import lv.javaguru.java2.businesslogic.api.DeleteRoomResponse;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class DeleteRoomView implements View {
-    private List<Room> rooms;
 
-    public DeleteRoomView(List<Room> rooms) {
-        this.rooms = rooms;
+    private DeleteRoomService deleteRoomService;
+
+    public DeleteRoomView(DeleteRoomService deleteRoomService) {
+        this.deleteRoomService = deleteRoomService;
     }
 
     @Override
@@ -20,17 +21,18 @@ public class DeleteRoomView implements View {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter room name: ");
         final String name = scanner.nextLine();
-        Optional<Room> foundRoom = rooms.stream()
-                .filter(r -> r.getName().equals(name))
-                .findFirst();
 
-        if (foundRoom.isPresent()) {
+        ///business logic
+        DeleteRoomResponse response = deleteRoomService.deleteByName(new DeleteRoomRequest(name));
+        ///end of business logic
+
+        if (response.isRemoved()) {
             System.out.println("Specified Room is found and will be deleted.");
-            rooms.remove(foundRoom.get());
         }
         else {
             System.out.println("Specified Room was not found.");
         }
+
         System.out.println("Delete Room option finished");
         System.out.println();
     }

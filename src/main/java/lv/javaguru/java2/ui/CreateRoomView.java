@@ -1,16 +1,19 @@
 package lv.javaguru.java2.ui;
 
 import lv.javaguru.java2.Room;
+import lv.javaguru.java2.businesslogic.CreateRoomService;
+import lv.javaguru.java2.businesslogic.api.CreateRoomRequest;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CreateRoomView implements View {
 
-    private List<Room> rooms;
 
-    public CreateRoomView(List<Room> rooms) {
-        this.rooms = rooms;
+    private CreateRoomService createRoomService;
+
+    public CreateRoomView(CreateRoomService createRoomService) {
+        this.createRoomService = createRoomService;
     }
 
     @Override
@@ -26,14 +29,11 @@ public class CreateRoomView implements View {
         String description = scanner.nextLine();
 
         //business logic
-        Room room = new Room();
-        room.setName(name);
-        room.setCapacity(capacity);
-        room.setDescription(description);
-        rooms.add(room);
+        createRoomService.createRoom(new CreateRoomRequest(name, capacity, description));
+        //note: no response here
         //end of business logic
 
-        System.out.println("New Room created!");
+        System.out.println("New Room create finished");
         System.out.println();
     }
 }
