@@ -1,7 +1,6 @@
 package lv.javaguru.java2.database.temp;
 
-import lv.javaguru.java2.Character;
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Character;
 import lv.javaguru.java2.database.CharacterDAO;
 
 import java.util.ArrayList;
@@ -21,6 +20,11 @@ public class InMemoryCharacterDB implements CharacterDAO {
     public Character save(Character character) {
         characters.add(character);
         return character;
+    }
+
+    @Override
+    public Optional<Character> getById(Long id) {
+        return null;
     }
 
     @Override

@@ -1,4 +1,6 @@
-package lv.javaguru.java2;
+package lv.javaguru.java2.domain;
+
+import lv.javaguru.java2.domain.Character;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

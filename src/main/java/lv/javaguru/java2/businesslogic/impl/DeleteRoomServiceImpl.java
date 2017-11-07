@@ -1,9 +1,7 @@
 package lv.javaguru.java2.businesslogic.impl;
 
-import lv.javaguru.java2.Character;
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Room;
 import lv.javaguru.java2.businesslogic.DeleteRoomService;
-import lv.javaguru.java2.businesslogic.api.DeleteCharacterResponse;
 import lv.javaguru.java2.businesslogic.api.DeleteRoomRequest;
 import lv.javaguru.java2.businesslogic.api.DeleteRoomResponse;
 import lv.javaguru.java2.database.RoomDAO;

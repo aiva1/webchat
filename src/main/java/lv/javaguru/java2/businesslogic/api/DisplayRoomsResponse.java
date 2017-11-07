@@ -1,6 +1,6 @@
 package lv.javaguru.java2.businesslogic.api;
 
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Room;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.Character;
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Character;
+import lv.javaguru.java2.domain.Room;
 
 import java.util.List;
 import java.util.Optional;

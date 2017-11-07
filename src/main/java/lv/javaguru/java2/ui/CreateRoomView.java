@@ -1,10 +1,8 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.Room;
 import lv.javaguru.java2.businesslogic.CreateRoomService;
 import lv.javaguru.java2.businesslogic.api.CreateRoomRequest;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class CreateRoomView implements View {

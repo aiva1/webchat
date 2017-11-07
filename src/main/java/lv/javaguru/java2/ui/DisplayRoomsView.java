@@ -1,12 +1,8 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.Character;
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Room;
 import lv.javaguru.java2.businesslogic.DisplayRoomsService;
 import lv.javaguru.java2.businesslogic.api.DisplayRoomsResponse;
-
-import java.util.List;
-import java.util.Scanner;
 
 public class DisplayRoomsView implements View {
 

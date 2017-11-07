@@ -1,6 +1,6 @@
 package lv.javaguru.java2.businesslogic.impl;
 
-import lv.javaguru.java2.Character;
+import lv.javaguru.java2.domain.Character;
 import lv.javaguru.java2.businesslogic.api.DeleteCharacterRequest;
 import lv.javaguru.java2.businesslogic.DeleteCharacterService;
 import lv.javaguru.java2.businesslogic.api.DeleteCharacterResponse;

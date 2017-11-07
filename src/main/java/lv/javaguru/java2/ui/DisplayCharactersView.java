@@ -1,6 +1,6 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.Character;
+import lv.javaguru.java2.domain.Character;
 import lv.javaguru.java2.businesslogic.api.DisplayCharactersResponse;
 import lv.javaguru.java2.businesslogic.DisplayCharactersService;
 

@@ -3,12 +3,12 @@ package lv.javaguru.java2.businesslogic.api;
 public class CreateCharacterRequest {
 
     private String name;
-    private boolean isMale;
+    private char sex;
     private String bio;
 
-    public CreateCharacterRequest(String name, boolean isMale, String bio) {
+    public CreateCharacterRequest(String name, char sex, String bio) {
         this.name = name;
-        this.isMale = isMale;
+        this.sex = sex;
         this.bio = bio;
     }
 
@@ -16,8 +16,8 @@ public class CreateCharacterRequest {
         return name;
     }
 
-    public boolean isMale() {
-        return isMale;
+    public char getSex() {
+        return sex;
     }
 
     public String getBio() {

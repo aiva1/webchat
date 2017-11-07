@@ -1,6 +1,6 @@
 package lv.javaguru.java2.database;
 
-import lv.javaguru.java2.Character;
+import lv.javaguru.java2.domain.Character;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface CharacterDAO {
 
     Character save(Character character);
+
+    Optional<Character> getById(Long id);
 
     Optional<Character> getByName(String name);
 

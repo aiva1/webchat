@@ -2,8 +2,12 @@ package lv.javaguru.java2;
 
 import lv.javaguru.java2.businesslogic.*;
 import lv.javaguru.java2.businesslogic.impl.*;
+import lv.javaguru.java2.database.CharacterDAO;
+import lv.javaguru.java2.database.jdbc.CharacterDAOImpl;
 import lv.javaguru.java2.database.temp.InMemoryCharacterDB;
 import lv.javaguru.java2.database.temp.InMemoryRoomDB;
+import lv.javaguru.java2.domain.Character;
+import lv.javaguru.java2.domain.Room;
 import lv.javaguru.java2.ui.*;
 
 import java.util.*;
@@ -28,9 +32,11 @@ public class ChatApplication {
         InMemoryCharacterDB characterDB = new InMemoryCharacterDB();
         InMemoryRoomDB roomDB = new InMemoryRoomDB();
 
-        CreateCharacterService createCharacterService = new CreateCharacterServiceImpl(characterDB);
-        DisplayCharactersService displayCharactersService = new DisplayCharactersServiceImpl(characterDB);
-        DeleteCharacterService deleteCharacterService = new DeleteCharacterServiceImpl(characterDB);
+        CharacterDAO characterDAO = new CharacterDAOImpl();
+
+        CreateCharacterService createCharacterService = new CreateCharacterServiceImpl(characterDAO);
+        DisplayCharactersService displayCharactersService = new DisplayCharactersServiceImpl(characterDAO);
+        DeleteCharacterService deleteCharacterService = new DeleteCharacterServiceImpl(characterDAO);
 
         CreateRoomService createRoomService = new CreateRoomServiceImpl(roomDB);
         DisplayRoomsService displayRoomsService = new DisplayRoomServiceImpl(roomDB);

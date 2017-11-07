@@ -1,7 +1,6 @@
 package lv.javaguru.java2.database.temp;
 
-import lv.javaguru.java2.Character;
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Room;
 import lv.javaguru.java2.database.RoomDAO;
 
 import java.util.ArrayList;
@@ -20,6 +19,11 @@ public class InMemoryRoomDB implements RoomDAO {
     public Room save(Room room) {
         rooms.add(room);
         return room;
+    }
+
+    @Override
+    public Optional<Room> getById(Long id) {
+        return null;
     }
 
     @Override

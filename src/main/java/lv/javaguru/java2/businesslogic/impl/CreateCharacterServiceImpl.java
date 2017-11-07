@@ -1,6 +1,6 @@
 package lv.javaguru.java2.businesslogic.impl;
 
-import lv.javaguru.java2.Character;
+import lv.javaguru.java2.domain.Character;
 import lv.javaguru.java2.businesslogic.api.CreateCharacterRequest;
 import lv.javaguru.java2.businesslogic.api.CreateCharacterResponse;
 import lv.javaguru.java2.businesslogic.CreateCharacterService;
@@ -18,7 +18,7 @@ public class CreateCharacterServiceImpl implements CreateCharacterService {
     public CreateCharacterResponse createCharacter(CreateCharacterRequest createRequest) {
         Character character = new Character();
         character.setName(createRequest.getName());
-        character.setMale(createRequest.isMale());
+        character.setSex(createRequest.getSex());
         character.setBio(createRequest.getBio());
         characterDAO.save(character);
 

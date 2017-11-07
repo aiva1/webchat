@@ -1,6 +1,6 @@
 package lv.javaguru.java2.businesslogic.impl;
 
-import lv.javaguru.java2.Room;
+import lv.javaguru.java2.domain.Room;
 import lv.javaguru.java2.businesslogic.CreateRoomService;
 import lv.javaguru.java2.businesslogic.api.CreateRoomRequest;
 import lv.javaguru.java2.businesslogic.api.CreateRoomResponse;
