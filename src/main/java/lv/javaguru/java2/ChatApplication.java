@@ -3,7 +3,9 @@ package lv.javaguru.java2;
 import lv.javaguru.java2.businesslogic.*;
 import lv.javaguru.java2.businesslogic.impl.*;
 import lv.javaguru.java2.database.CharacterDAO;
+import lv.javaguru.java2.database.RoomDAO;
 import lv.javaguru.java2.database.jdbc.CharacterDAOImpl;
+import lv.javaguru.java2.database.jdbc.RoomDAOImpl;
 import lv.javaguru.java2.database.temp.InMemoryCharacterDB;
 import lv.javaguru.java2.database.temp.InMemoryRoomDB;
 import lv.javaguru.java2.domain.Character;
@@ -29,18 +31,19 @@ public class ChatApplication {
         //11. Delete Room
         //12. Exit
 
-        InMemoryCharacterDB characterDB = new InMemoryCharacterDB();
-        InMemoryRoomDB roomDB = new InMemoryRoomDB();
+        //InMemoryCharacterDB characterDB = new InMemoryCharacterDB();
+        //InMemoryRoomDB roomDB = new InMemoryRoomDB();
 
         CharacterDAO characterDAO = new CharacterDAOImpl();
+        RoomDAO roomDAO = new RoomDAOImpl();
 
         CreateCharacterService createCharacterService = new CreateCharacterServiceImpl(characterDAO);
         DisplayCharactersService displayCharactersService = new DisplayCharactersServiceImpl(characterDAO);
         DeleteCharacterService deleteCharacterService = new DeleteCharacterServiceImpl(characterDAO);
 
-        CreateRoomService createRoomService = new CreateRoomServiceImpl(roomDB);
-        DisplayRoomsService displayRoomsService = new DisplayRoomServiceImpl(roomDB);
-        DeleteRoomService deleteRoomService = new DeleteRoomServiceImpl(roomDB);
+        CreateRoomService createRoomService = new CreateRoomServiceImpl(roomDAO);
+        DisplayRoomsService displayRoomsService = new DisplayRoomServiceImpl(roomDAO);
+        DeleteRoomService deleteRoomService = new DeleteRoomServiceImpl(roomDAO);
 
 
 

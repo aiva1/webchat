@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Room {
 
+    private Long id;
     private String name;
     private int capacity;
     private String description;
@@ -18,6 +19,7 @@ public class Room {
         messages = new LinkedList<>();
         characters = new ArrayList<>();
     }
+
 
     public void addMessage(String message) {
         messages.add(message);
@@ -36,6 +38,10 @@ public class Room {
         }
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -46,6 +52,10 @@ public class Room {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -71,7 +81,10 @@ public class Room {
     @Override
     public String toString() {
         return "Room{"+
-                "name= " + name + ", capacity= " + capacity + ", description= " + description +
+                "id= " +id +
+                "name= " + name +
+                ", capacity= " + capacity +
+                ", description= " + description +
                 "}";
     }
 }

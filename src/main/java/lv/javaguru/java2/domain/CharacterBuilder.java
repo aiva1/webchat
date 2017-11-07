@@ -17,7 +17,8 @@ public class CharacterBuilder {
         return createCharacter()
                 .withName(name)
                 .withSex(sex)
-                .withBio(bio).build();
+                .withBio(bio)
+                .build();
     }
 
     public Character build() {

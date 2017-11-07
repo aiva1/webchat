@@ -1,9 +1,9 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.database.CharacterDAO;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.domain.Character;
-import lv.javaguru.java2.domain.CharacterBuilder;
+import lv.javaguru.java2.database.RoomDAO;
+import lv.javaguru.java2.domain.Room;
+import lv.javaguru.java2.domain.RoomBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,97 +12,96 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CharacterDAOImpl extends DAOImpl implements CharacterDAO {
+public class RoomDAOImpl extends DAOImpl implements RoomDAO {
 
     @Override
-    public Character save(Character character) {
+    public Room save(Room room) {
         Connection connection = null;
         try {
             connection = getConnection();
-            String sqlStatement = "INSERT INTO characters(id, name, sex, bio) values (default, ?, ?, ?)";
+            String sqlStatement = "INSERT INTO rooms(id, name, capacity, description) values (default, ?, ?, ?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sqlStatement, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, character.getName());
-            preparedStatement.setString(2, String.valueOf(character.getSex()));
-            preparedStatement.setString(3, character.getBio());
+            preparedStatement.setString(1, room.getName());
+            preparedStatement.setInt(2, room.getCapacity());
+            preparedStatement.setString(3, room.getDescription());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
-                character.setId(rs.getLong(1));
+                room.setId(rs.getLong(1));
             }
         }
         catch (Throwable e) {
-            System.out.println("Exception while executing CharacterDAOImpl.save()");
+            System.out.println("Exception while executing RoomDAOImpl.save()");
             e.printStackTrace();
             throw new DBException(e);
         }
         finally {
             closeConnection(connection);
         }
-
-        return character;
+        return room;
     }
 
+
     @Override
-    public Optional<Character> getById(Long id) {
+    public Optional<Room> getById(Long id) {
         Connection connection = null;
 
         try {
             connection = getConnection();
-            String sqlStatement = "SELECT * FROM characters WHERE id = ?";
+            String sqlStatement = "SELECT * FROM rooms WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            Character character = null;
+            Room room = null;
 
             if (resultSet.next()) {
-                character = CharacterBuilder.createCharacter()
-                            .withId(resultSet.getLong("id"))
-                            .withName(resultSet.getString("name"))
-                            .withSex(resultSet.getString("sex").charAt(0))
-                            .withBio(resultSet.getString("bio"))
-                            .build();
+                room = RoomBuilder.createRoom()
+                        .withId(resultSet.getLong("id"))
+                        .withName(resultSet.getString("name"))
+                        .withCapacity(resultSet.getInt("capacity"))
+                        .withDescription(resultSet.getString("description"))
+                        .build();
             }
-            return Optional.ofNullable(character);
+            return Optional.ofNullable(room);
         }
         catch (Throwable e) {
-            System.out.println("Exception while executing CharacterDAOImpl.getById()");
+            System.out.println("Exception while executing RoomDAOImpl.getById()");
             e.printStackTrace();
             throw new DBException(e);
         }
         finally {
             closeConnection(connection);
         }
-
     }
 
     @Override
-    public Optional<Character> getByName(String name) {
+    public Optional<Room> getByName(String name) {
         Connection connection = null;
 
         try {
             connection = getConnection();
-            String sqlStatement = "SELECT * FROM characters WHERE name = ?";
+            String sqlStatement = "SELECT * FROM rooms WHERE name = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
             preparedStatement.setString(1, name);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            Character character = null;
+            Room room = null;
 
             if (resultSet.next()) {
-                character = CharacterBuilder.createCharacter()
+                room = RoomBuilder.createRoom()
                         .withId(resultSet.getLong("id"))
                         .withName(resultSet.getString("name"))
-                        .withSex(resultSet.getString("sex").charAt(0))
-                        .withBio(resultSet.getString("bio"))
+                        .withCapacity(resultSet.getInt("capacity"))
+                        .withDescription(resultSet.getString("description"))
                         .build();
             }
-            return Optional.ofNullable(character);
+            return Optional.ofNullable(room);
         }
         catch (Throwable e) {
-            System.out.println("Exception while executing CharacterDAOImpl.getByName()");
+            System.out.println("Exception while executing RoomDAOImpl.getByName()");
             e.printStackTrace();
             throw new DBException(e);
         }
@@ -112,50 +111,49 @@ public class CharacterDAOImpl extends DAOImpl implements CharacterDAO {
     }
 
     @Override
-    public void delete(Character character) {
+    public void delete(Room room) {
         Connection connection = null;
 
         try {
             connection = getConnection();
-            String sql = "DELETE FROM characters WHERE id = ?";
+            String sql = "DELETE FROM rooms WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, character.getId());
+            preparedStatement.setLong(1, room.getId());
             preparedStatement.executeUpdate();
         }
         catch (Throwable e) {
-            System.out.println("Exception while executing CharacterDAOImpl.delete()");
+            System.out.println("Exception while executing RoomDAOImpl.delete()");
             e.printStackTrace();
             throw new DBException(e);
         }
         finally {
             closeConnection(connection);
         }
-
     }
 
     @Override
-    public List<Character> getAll() {
-        List<Character> characters = new ArrayList<>();
+    public List<Room> getAll() {
+        List<Room> rooms = new ArrayList<>();
         Connection connection = null;
 
         try {
             connection = getConnection();
-            String sql = "SELECT * FROM characters";
+            String sql = "SELECT * FROM rooms";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Character character = CharacterBuilder.createCharacter()
+                Room room = RoomBuilder.createRoom()
                         .withId(resultSet.getLong("id"))
                         .withName(resultSet.getString("name"))
-                        .withSex(resultSet.getString("sex").charAt(0))
-                        .withBio(resultSet.getString("bio"))
+                        .withCapacity(resultSet.getInt("capacity"))
+                        .withDescription(resultSet.getString("description"))
                         .build();
-                characters.add(character);
+                rooms.add(room);
             }
         }
         catch (Throwable e) {
-            System.out.println("Exception while executing CharacterDAOImpl.getAll()");
+            System.out.println("Exception while executing RoomDAOImpl.getAll()");
             e.printStackTrace();
             throw new DBException(e);
         }
@@ -163,6 +161,6 @@ public class CharacterDAOImpl extends DAOImpl implements CharacterDAO {
             closeConnection(connection);
         }
 
-        return characters;
+        return rooms;
     }
 }
